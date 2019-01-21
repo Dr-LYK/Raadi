@@ -10,20 +10,25 @@ import java.util.stream.Stream;
 
 public class Converter {
 
-    public static HashSet<String> StopWordsJsonToHashSet() throws IOException {
+    public static HashSet<String> StopWordsJsonToHashSet() {
 
-        byte[] encoded = Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/main/java/Raadi/util/StopWords.json"));
-        String stopWordsString = new String(encoded, Charset.defaultCharset());
-        stopWordsString = stopWordsString.substring(1, stopWordsString.length() - 1);
+        try {
+            byte[] encoded = Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/src/main/java/Raadi/util/StopWords.json"));
+            String stopWordsString = new String(encoded, Charset.defaultCharset());
+            stopWordsString = stopWordsString.substring(1, stopWordsString.length() - 1);
 
-        String[] items = stopWordsString.split(",");
-        for (int i = 0; i < items.length; i++)
-            items[i] = items[i].substring(1, items[i].length() - 1);
+            String[] items = stopWordsString.split(",");
+            for (int i = 0; i < items.length; i++)
+                items[i] = items[i].substring(1, items[i].length() - 1);
 
-        return new HashSet<>(Arrays.asList(items));
+            return new HashSet<>(Arrays.asList(items));
+        }
+        catch (IOException ignored) {
+        }
+        return null;
     }
 
-    public static HashMap<String, String> SynonymsCSVToHashMap() throws IOException {
+    public static HashMap<String, String> SynonymsCSVToHashMap() {
 
         HashMap<String, String> synonymsHashMap = new HashMap<>();
 
