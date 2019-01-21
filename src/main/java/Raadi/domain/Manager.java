@@ -4,12 +4,8 @@ import Raadi.domain.model.DocumentClean;
 import Raadi.domain.model.DocumentRaw;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.HashMap;
-=======
->>>>>>> 66ff8bd100e1b308561a7ff85e89aa8776650d69
 import java.util.HashSet;
-import java.util.List;
 
 public class Manager
 {
