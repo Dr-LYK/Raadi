@@ -15,6 +15,12 @@ public class CleanUp
     public static DocumentClean cleanup(DocumentRaw documentRaw)
     {
         DocumentClean documentClean = new DocumentClean();
+
+        documentClean.setContent(documentRaw.getContent());
+        documentClean.setChildrenURL(documentRaw.getChildrenURL());
+        documentClean.setURL(documentRaw.getURL());
+        documentClean.setVector(tokenization(documentClean.getContent()));
+
         return documentClean;
     }
 
