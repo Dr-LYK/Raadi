@@ -1,4 +1,4 @@
-package Raadi;
+package Raadi.domain;
 
 import java.util.HashSet;
 import java.util.List;
