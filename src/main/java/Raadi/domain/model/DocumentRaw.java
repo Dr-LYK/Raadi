@@ -11,4 +11,36 @@ public class DocumentRaw {
 
     public DocumentRaw() {
     }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
+
+    public String getSrcURL() {
+        return srcURL;
+    }
+
+    public void setSrcURL(String srcURL) {
+        this.srcURL = srcURL;
+    }
+
+    public HashSet<String> getChildrenURL() {
+        return childrenURL;
+    }
+
+    public void setChildrenURL(HashSet<String> childrenURL) {
+        this.childrenURL = childrenURL;
+    }
 }

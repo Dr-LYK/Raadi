@@ -1,38 +1,41 @@
 package Raadi.domain;
 
+import Raadi.domain.model.DocumentRaw;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public final class Crawler
 {
-    public static RaadiDocument crawl(String URL)
+    public static DocumentRaw crawl(String URL)
     {
-        RaadiDocument raadiDocument = new RaadiDocument();
+        DocumentRaw documentRaw = new DocumentRaw();
 
         try {
             // Get the content of the page
             Document doc = Jsoup.connect(URL).get();
             Element content = doc.body();
+            String contentRaw = content.text();
 
             // Get all the url linked in the page
             Elements links = doc.select("a[href]");
-            ArrayList<String> childUrl = new ArrayList<>();
+            HashSet<String> childrenURL = new HashSet<>();
             for (Element link : links) {
-                childUrl.add(link.attr("abs:href"));
+                childrenURL.add(link.attr("abs:href"));
             }
 
-            // raadiDocument.content = body;
-            // raadiDocument.url = URL
-            // raadiDocument.childrenUrl = childUrl
+            // Fill the document with several informations : url, content, children urls
+            documentRaw.setContent(contentRaw);
+            documentRaw.setURL(URL);
+            documentRaw.setChildrenURL(childrenURL);
 
         } catch (Exception ex) {
             System.err.print(ex);
         }
 
-        return raadiDocument;
+        return documentRaw;
     };
 }
