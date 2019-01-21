@@ -50,12 +50,20 @@ public class Manager
         return synonymes;
     }
 
+    public void execute(String firstURL, int max_size) {
+        crawl(firstURL, max_size);
+        cleanup();
+        fillRetroIndex();
+
+        System.out.print(documentCleanList);
+    }
+
     /**
      * Manager crawl function to fill the documentRawList.
      * @param firstURL is the entry url.
      * @param max_size is the maximun url number wanted.
      */
-    public void crawl(String firstURL, int max_size) {
+    private void crawl(String firstURL, int max_size) {
         linksTodo.add(firstURL);
 
         while (linksDone.size() < max_size && !linksTodo.isEmpty()) {
