@@ -5,6 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.jsoup.HttpStatusException;
 
 import java.util.HashSet;
 
@@ -33,7 +34,8 @@ public final class Crawler
             documentRaw.setChildrenURL(childrenURL);
 
         } catch (Exception ex) {
-            System.err.print(ex);
+            System.err.println(ex);
+            return null;
         }
 
         return documentRaw;

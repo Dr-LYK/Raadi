@@ -56,7 +56,8 @@ public class Manager
         cleanup();
         fillRetroIndex();
 
-        System.out.print(documentCleanList);
+        System.out.println(documentCleanList.size());
+        System.out.println(retroIndex);
     }
 
     /**
@@ -67,15 +68,17 @@ public class Manager
     private void crawl(String firstURL, int max_size) {
         linksTodo.add(firstURL);
 
-        while (linksDone.size() < max_size && !linksTodo.isEmpty()) {
+        while (documentRawList.size() < max_size && !linksTodo.isEmpty()) {
             String url = linksTodo.poll();
 
             if (!linksDone.contains(url)) {
                 DocumentRaw dr = Crawler.crawl(url);
-                documentRawList.add(dr);
-                linksDone.add(url);
+                if (dr != null) {
+                    documentRawList.add(dr);
+                    linksDone.add(url);
 
-                linksTodo.addAll(dr.getChildrenURL());
+                    linksTodo.addAll(dr.getChildrenURL());
+                }
             }
         }
     }

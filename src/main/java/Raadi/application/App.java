@@ -9,7 +9,7 @@ public class App
 {
     public static void main( String[] args ) {
         Manager manager = Manager.getInstance();
-        manager.execute("https://fr.wikipedia.org/wiki/Wikipédia:Accueil_principal", 10);
+        manager.execute("https://news.ycombinator.com", 10);
 
         System.out.println( "Hello World!" );
     }
