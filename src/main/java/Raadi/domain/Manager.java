@@ -85,7 +85,6 @@ public class Manager
     private void cleanup() {
         for (DocumentRaw documentRaw : documentRawList) {
             documentCleanList.add(CleanUp.cleanup(documentRaw));
-            documentRawList.remove(documentRaw);
         }
         documentRawList.clear();
     }
