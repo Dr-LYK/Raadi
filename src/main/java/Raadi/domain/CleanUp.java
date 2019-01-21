@@ -11,7 +11,11 @@ import java.util.regex.Pattern;
 public class CleanUp
 {
 
-
+    /**
+     * cleanup
+     * @param documentRaw
+     * @return
+     */
     public static DocumentClean cleanup(DocumentRaw documentRaw)
     {
         DocumentClean documentClean = new DocumentClean();
@@ -19,17 +23,17 @@ public class CleanUp
         documentClean.setContent(documentRaw.getContent());
         documentClean.setChildrenURL(documentRaw.getChildrenURL());
         documentClean.setURL(documentRaw.getURL());
-        documentClean.setVector(tokenization(documentClean.getContent()));
+        documentClean.setVector(tokenisation(documentClean.getContent()));
 
         return documentClean;
     }
 
     /**
-     *
+     * tokenisation
      * @param text
      * @return HashMap<String, TokenData>
      */
-    private static HashMap<String, TokenData> tokenization(String text)
+    private static HashMap<String, TokenData> tokenisation(String text)
     {
         HashMap<String, TokenData> vector = new HashMap<>();
         String[] arrWords = text.split(" ");
@@ -62,8 +66,8 @@ public class CleanUp
                     // Transform for stemming algo
                     token = stemmingTransform(token);
 
-                    // Transform for synonyme
-                    token = synonymeTransform(token);
+                    // Transform for synonym
+                    token = synonymTransform(token);
 
                     TokenData tokenData = new TokenData(unitFrequence, new ArrayList<Integer>() {{
                         add(position);
@@ -91,7 +95,7 @@ public class CleanUp
     /**
      * stemmingTransform
      * @param word
-     * @return
+     * @return String : Transformed stemming
      */
     private static String stemmingTransform(String word)
     {
@@ -105,7 +109,12 @@ public class CleanUp
         return word;
     }
 
-    private static String synonymeTransform(String word)
+    /**
+     * synonymTransform
+     * @param word
+     * @return String : Transform synonym
+     */
+    private static String synonymTransform(String word)
     {
         return (Manager.getInstance().getSynonymes().containsKey(word)) ? Manager.getInstance().getSynonymes().get(word) : word;
     }
