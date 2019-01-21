@@ -9,7 +9,6 @@ public class DocumentRaw {
      */
     private String content;
     private String URL;
-    private String srcURL;
     private HashSet<String> childrenURL;
 
     /**
@@ -42,22 +41,6 @@ public class DocumentRaw {
      */
     public void setURL(String URL) {
         this.URL = URL;
-    }
-
-    /**
-     * DocumentRaw source URL getter.
-     * @return the document URL where it comes from.
-     */
-    public String getSrcURL() {
-        return srcURL;
-    }
-
-    /**
-     * DocumentRaw source URL setter.
-     * @param srcURL is the document URL where it comes from.
-     */
-    public void setSrcURL(String srcURL) {
-        this.srcURL = srcURL;
     }
 
     /**
