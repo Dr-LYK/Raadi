@@ -33,7 +33,7 @@ public class CleanUp
      * @param text
      * @return HashMap<String, TokenData>
      */
-    private static HashMap<String, TokenData> tokenisation(String text)
+    public static HashMap<String, TokenData> tokenisation(String text)
     {
         HashMap<String, TokenData> vector = new HashMap<>();
         String[] arrWords = text.split(" ");
@@ -100,11 +100,11 @@ public class CleanUp
     private static String stemmingTransform(String word)
     {
         if (Pattern.matches(".+sses", word) || Pattern.matches(".+ies", word))
-            return word.substring(0, word.length()-3);
+            return word.substring(0, word.length()-2);
         else if (Pattern.matches(".+ss", word))
             return word;
         else if (Pattern.matches(".+s", word))
-            return word.substring(0, word.length() - 2);
+            return word.substring(0, word.length() - 1);
 
         return word;
     }

@@ -83,6 +83,10 @@ public class Manager
         }
     }
 
+    public HashMap<String, ArrayList<DocumentClean>> getRetroIndex() {
+        return retroIndex;
+    }
+
     /**
      * documentCleanList content setter.
      */
