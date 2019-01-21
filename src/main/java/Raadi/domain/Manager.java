@@ -12,9 +12,9 @@ public class Manager
     private HashSet<String> linksDone;
     private ArrayList<DocumentRaw> documentRawList;
     private ArrayList<DocumentClean> documentCleanList;
-    private HashMap<String, String> synonymes;
+    private HashMap<String, String> synonyms;
 
-    HashMap<String, ArrayList<DocumentClean>> retroIndex;
+    private HashMap<String, ArrayList<DocumentClean>> retroIndex;
 
 
     private Manager() {
@@ -23,7 +23,7 @@ public class Manager
         this.documentRawList = new ArrayList<>();
         this.documentCleanList = new ArrayList<>();
         this.stopWords = Converter.StopWordsJsonToHashSet();
-        this.synonymes = Converter.SynonymsCSVToHashMap();
+        this.synonyms = Converter.SynonymsCSVToHashMap();
     }
 
     private static class ManagerHolder {
@@ -46,8 +46,8 @@ public class Manager
      * Manager synonymes getter.
      * @return the synonymes.
      */
-    public HashMap<String, String> getSynonymes() {
-        return synonymes;
+    public HashMap<String, String> getSynonyms() {
+        return synonyms;
     }
 
     public void execute(String firstURL, int max_size) {
@@ -74,9 +74,7 @@ public class Manager
                 documentRawList.add(dr);
                 linksDone.add(url);
 
-                for (String childUrl : dr.getChildrenURL()) {
-                    linksTodo.add(childUrl);
-                }
+                linksTodo.addAll(dr.getChildrenURL());
             }
         }
     }
@@ -89,12 +87,13 @@ public class Manager
             documentCleanList.add(CleanUp.cleanup(documentRaw));
             documentRawList.remove(documentRaw);
         }
+        documentRawList.clear();
     }
 
     /**
      * retroIndex content setter.
      */
-    public void fillRetroIndex() {
+    private void fillRetroIndex() {
         for (DocumentClean dc : documentCleanList) {
             for (String key : dc.getVector().keySet()) {
                 ArrayList<DocumentClean> value = new ArrayList<>();

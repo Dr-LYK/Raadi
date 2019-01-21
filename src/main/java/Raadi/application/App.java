@@ -7,8 +7,7 @@ import java.io.IOException;
 
 public class App 
 {
-    public static void main( String[] args ) throws IOException
-    {
+    public static void main( String[] args ) {
         Manager manager = Manager.getInstance();
         manager.execute("https://fr.wikipedia.org/wiki/Wikipédia:Accueil_principal", 10);
 
