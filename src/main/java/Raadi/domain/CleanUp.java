@@ -116,6 +116,6 @@ public class CleanUp
      */
     private static String synonymTransform(String word)
     {
-        return (Manager.getInstance().getSynonymes().containsKey(word)) ? Manager.getInstance().getSynonymes().get(word) : word;
+        return Manager.getInstance().getSynonyms().getOrDefault(word, word);
     }
 }
