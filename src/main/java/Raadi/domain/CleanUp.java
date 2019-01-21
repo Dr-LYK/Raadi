@@ -39,7 +39,7 @@ public class CleanUp
         for (int i = 0; i < arrWords.length; i++)
         {
             final int position = i;
-            final String token = arrWords[i];
+            String token = arrWords[i];
 
             // The word already exists
             if (vector.containsKey(arrWords[i]))
@@ -56,15 +56,19 @@ public class CleanUp
             }
             else // create the token
             {
-                // TODO : Synonyme
+                // if is not a stop word
                 if (!isStopWord(token))
                 {
-                    final String transformedToken = stemmingTransform(token);
+                    // Transform for stemming algo
+                    token = stemmingTransform(token);
+
+                    // Transform for synonyme
+                    token = synonymeTransform(token);
 
                     TokenData tokenData = new TokenData(unitFrequence, new ArrayList<Integer>() {{
                         add(position);
                     }});
-                    vector.put(transformedToken, tokenData);
+                    vector.put(token, tokenData);
                 }
             }
 
@@ -74,11 +78,21 @@ public class CleanUp
     }
 
 
+    /**
+     * isStopWord
+     * @param word
+     * @return
+     */
     private static Boolean isStopWord(String word)
     {
         return Manager.getInstance().getStopWords().contains(word);
     }
 
+    /**
+     * stemmingTransform
+     * @param word
+     * @return
+     */
     private static String stemmingTransform(String word)
     {
         if (Pattern.matches(".+sses", word) || Pattern.matches(".+ies", word))
@@ -89,5 +103,10 @@ public class CleanUp
             return word.substring(0, word.length() - 2);
 
         return word;
+    }
+
+    private static String synonymeTransform(String word)
+    {
+        return (Manager.getInstance().getSynonymes().containsKey(word)) ? Manager.getInstance().getSynonymes().get(word) : word;
     }
 }

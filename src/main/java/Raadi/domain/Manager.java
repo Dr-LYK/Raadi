@@ -3,8 +3,6 @@ package Raadi.domain;
 import Raadi.domain.model.DocumentClean;
 import Raadi.domain.model.DocumentRaw;
 import Raadi.util.Converter;
-
-import java.io.IOException;
 import java.util.*;
 
 public class Manager
@@ -16,6 +14,7 @@ public class Manager
     private HashSet<String> linksDone;
     private ArrayList<DocumentRaw> documentRawList;
     private ArrayList<DocumentClean> documentCleanList;
+    private HashMap<String, String> synonymes;
 
     HashMap<String, ArrayList<DocumentClean>> retroIndex;
 
@@ -26,10 +25,15 @@ public class Manager
         this.documentRawList = new ArrayList<>();
         this.documentCleanList = new ArrayList<>();
         this.stopWords = Converter.StopWordsJsonToHashSet();
+        this.synonymes = Converter.SynonymsCSVToHashMap();
     }
 
     public HashSet<String> getStopWords() {
         return stopWords;
+    }
+
+    public HashMap<String, String> getSynonymes() {
+        return synonymes;
     }
 
     private static class ManagerHolder {
