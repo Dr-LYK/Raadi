@@ -6,9 +6,12 @@ import Raadi.domain.model.TokenData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class CleanUp
 {
+
+
     public static DocumentClean cleanup(DocumentRaw documentRaw)
     {
         DocumentClean documentClean = new DocumentClean();
@@ -47,9 +50,16 @@ public class CleanUp
             }
             else // create the token
             {
-                // TODO : Check for Stop Words
-                TokenData tokenData = new TokenData(unitFrequence, new ArrayList<Integer>() {{add(position);}});
-                vector.put(arrWords[i], tokenData);
+                // TODO : Synonyme
+                if (!isStopWord(token))
+                {
+                    final String transformedToken = stemmingTransform(token);
+
+                    TokenData tokenData = new TokenData(unitFrequence, new ArrayList<Integer>() {{
+                        add(position);
+                    }});
+                    vector.put(transformedToken, tokenData);
+                }
             }
 
         }
@@ -58,5 +68,20 @@ public class CleanUp
     }
 
 
+    private static Boolean isStopWord(String word)
+    {
+        return Manager.getInstance().getStopWords().contains(word);
+    }
 
+    private static String stemmingTransform(String word)
+    {
+        if (Pattern.matches(".+sses", word) || Pattern.matches(".+ies", word))
+            return word.substring(0, word.length()-3);
+        else if (Pattern.matches(".+ss", word))
+            return word;
+        else if (Pattern.matches(".+s", word))
+            return word.substring(0, word.length() - 2);
+
+        return word;
+    }
 }

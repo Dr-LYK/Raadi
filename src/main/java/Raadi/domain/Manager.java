@@ -2,6 +2,7 @@ package Raadi.domain;
 
 import Raadi.domain.model.DocumentClean;
 import Raadi.domain.model.DocumentRaw;
+import Raadi.util.Converter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.HashSet;
 
 public class Manager
 {
+    private HashSet<String> stopWords;
     private HashSet<String> linksTodo;
     private HashSet<String> linksDone;
     private ArrayList<DocumentRaw> documentRawList;
@@ -22,6 +24,11 @@ public class Manager
         this.linksDone = new HashSet<>();
         this.documentRawList = new ArrayList<>();
         this.documentCleanList = new ArrayList<>();
+        this.stopWords = Converter.StopWordsJsonToHashSet();
+    }
+
+    public HashSet<String> getStopWords() {
+        return stopWords;
     }
 
     private static class ManagerHolder {
