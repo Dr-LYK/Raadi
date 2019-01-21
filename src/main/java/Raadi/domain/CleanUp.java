@@ -3,7 +3,6 @@ package Raadi.domain;
 import Raadi.domain.model.DocumentClean;
 import Raadi.domain.model.DocumentRaw;
 import Raadi.domain.model.TokenData;
-import com.sun.corba.se.impl.logging.POASystemException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,4 +56,7 @@ public class CleanUp
 
         return vector;
     }
+
+
+
 }
