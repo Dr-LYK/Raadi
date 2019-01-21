@@ -24,6 +24,7 @@ public class Manager
         this.documentCleanList = new ArrayList<>();
         this.stopWords = Converter.StopWordsJsonToHashSet();
         this.synonyms = Converter.SynonymsCSVToHashMap();
+        this.retroIndex = new HashMap<>();
     }
 
     private static class ManagerHolder {
