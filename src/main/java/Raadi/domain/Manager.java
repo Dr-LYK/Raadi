@@ -74,9 +74,7 @@ public class Manager
                 documentRawList.add(dr);
                 linksDone.add(url);
 
-                for (String childUrl : dr.getChildrenURL()) {
-                    linksTodo.add(childUrl);
-                }
+                linksTodo.addAll(dr.getChildrenURL());
             }
         }
     }
