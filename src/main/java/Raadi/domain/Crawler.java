@@ -18,7 +18,7 @@ public final class Crawler
             // Get the content of the page
             Document doc = Jsoup.connect(URL).get();
             Element content = doc.body();
-            String contentRaw = content.text();
+            String contentRaw = content.text().toLowerCase();
 
             // Get all the url linked in the page
             Elements links = doc.select("a[href]");
