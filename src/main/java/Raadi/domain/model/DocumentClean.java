@@ -1,5 +1,6 @@
 package Raadi.domain.model;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class DocumentClean {
@@ -11,6 +12,15 @@ public class DocumentClean {
     private String URL;
     private String srcURL;
     private HashSet<String> childrenURL;
+    private HashMap<String, TokenData> vector;
+
+    public HashMap<String, TokenData> getVector() {
+        return vector;
+    }
+
+    public void setVector(HashMap<String, TokenData> vector) {
+        this.vector = vector;
+    }
 
     /**
      * DocumentClean content getter.
