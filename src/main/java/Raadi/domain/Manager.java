@@ -4,14 +4,15 @@ import Raadi.domain.model.DocumentClean;
 import Raadi.domain.model.DocumentRaw;
 import Raadi.util.Converter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.io.IOException;
+import java.util.*;
 
 public class Manager
 {
+
+    private final int max_size = 50;
+    private Queue<String> linksTodo;
     private HashSet<String> stopWords;
-    private HashSet<String> linksTodo;
     private HashSet<String> linksDone;
     private ArrayList<DocumentRaw> documentRawList;
     private ArrayList<DocumentClean> documentCleanList;
@@ -20,7 +21,7 @@ public class Manager
 
 
     private Manager() {
-        this.linksTodo = new HashSet<>();
+        this.linksTodo = new LinkedList<>();
         this.linksDone = new HashSet<>();
         this.documentRawList = new ArrayList<>();
         this.documentCleanList = new ArrayList<>();
@@ -39,12 +40,20 @@ public class Manager
         return ManagerHolder.instance;
     }
 
-    private void crawl() {
-        for (String url : linksTodo) {
+    private void crawl(String firstURL) {
+        linksTodo.add(firstURL);
+
+        while (linksDone.size() < max_size && !linksTodo.isEmpty()) {
+            String url = linksTodo.poll();
+
             if (!linksDone.contains(url)) {
-                documentRawList.add(Crawler.crawl(url));
-                linksTodo.remove(url);
+                DocumentRaw dr = Crawler.crawl(url);
+                documentRawList.add(dr);
                 linksDone.add(url);
+
+                for (String childUrl : dr.getChildrenURL()) {
+                    linksTodo.add(childUrl);
+                }
             }
         }
     }
