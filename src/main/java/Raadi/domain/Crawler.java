@@ -1,4 +1,4 @@
-package Raadi;
+package Raadi.domain;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
