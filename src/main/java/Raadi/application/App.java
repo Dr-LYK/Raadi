@@ -1,4 +1,4 @@
-package Raadi;
+package Raadi.application;
 
 /**
  * Hello world!

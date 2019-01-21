@@ -1,4 +1,4 @@
-package Raadi;
+package Raadi.domain;
 
 public final class Crawler
 {
