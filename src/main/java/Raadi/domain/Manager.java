@@ -7,8 +7,6 @@ import java.util.*;
 
 public class Manager
 {
-
-    private final int max_size = 50;
     private Queue<String> linksTodo;
     private HashSet<String> stopWords;
     private HashSet<String> linksDone;
@@ -28,14 +26,6 @@ public class Manager
         this.synonymes = Converter.SynonymsCSVToHashMap();
     }
 
-    public HashSet<String> getStopWords() {
-        return stopWords;
-    }
-
-    public HashMap<String, String> getSynonymes() {
-        return synonymes;
-    }
-
     private static class ManagerHolder {
         private final static Manager instance = new Manager();
     }
@@ -44,7 +34,28 @@ public class Manager
         return ManagerHolder.instance;
     }
 
-    private void crawl(String firstURL) {
+    /**
+     * Manager stop words getter.
+     * @return the stop words.
+     */
+    public HashSet<String> getStopWords() {
+        return stopWords;
+    }
+
+    /**
+     * Manager synonymes getter.
+     * @return the synonymes.
+     */
+    public HashMap<String, String> getSynonymes() {
+        return synonymes;
+    }
+
+    /**
+     * Manager crawl function to fill the documentRawList.
+     * @param firstURL is the entry url.
+     * @param max_size is the maximun url number wanted.
+     */
+    public void crawl(String firstURL, int max_size) {
         linksTodo.add(firstURL);
 
         while (linksDone.size() < max_size && !linksTodo.isEmpty()) {
@@ -62,6 +73,9 @@ public class Manager
         }
     }
 
+    /**
+     * documentCleanList content setter.
+     */
     private void cleanup() {
         for (DocumentRaw documentRaw : documentRawList) {
             documentCleanList.add(CleanUp.cleanup(documentRaw));
@@ -69,6 +83,9 @@ public class Manager
         }
     }
 
+    /**
+     * retroIndex content setter.
+     */
     public void fillRetroIndex() {
         for (DocumentClean dc : documentCleanList) {
             for (String key : dc.getVector().keySet()) {
