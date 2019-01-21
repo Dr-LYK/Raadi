@@ -1,13 +1,15 @@
 package Raadi.domain;
 
+import Raadi.domain.model.DocumentClean;
+
 import java.util.HashSet;
 import java.util.List;
 
-public class EventBus
+public class Manager
 {
     HashSet<String> linksTodo;
     HashSet<String> linksDone;
-    List<RaadiDocument> documents;
+    List<DocumentClean> documents;
 
 
 }
